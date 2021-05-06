@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import time
+import sys
 import smtplib
 from email.mime.multipart import MIMEMultipart 
 from email.mime.text import MIMEText
@@ -44,3 +45,4 @@ while(True):
         else:
             mailserver.sendmail('sender@gmail.com','receiver@gmail.com',msg.as_string())
             mailserver.quit()
+            sys.exit()
