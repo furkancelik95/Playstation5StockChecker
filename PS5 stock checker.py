@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import sys
+import ctypes
 import smtplib
 from email.mime.multipart import MIMEMultipart 
 from email.mime.text import MIMEText
@@ -28,21 +29,23 @@ while(True):
 
     soup = BeautifulSoup(page.content, 'html.parser')
 
-    job_elems = soup.find_all('div', class_='d-cell col-xs-12 short-basket-button')
+    job_elems = soup.find_all('div', class_='d-cell product-button--cell')
 
     for job_elem in job_elems:
     # Each job_elem is a new BeautifulSoup object.
     # You can use the same methods on it as you did before.
-        title_elem = job_elem.find('a', class_='btn btn-success btn-stock')
-        result = str(title_elem)
-        result = result.replace('<a class="btn btn-success btn-stock"><span class="icon-shopping-card hidden-sm hidden-md hidden-lg"></span>','')
-        result = result.replace('</a>','')
-        print(result)
+        title_elem2 = job_elem.find('span')
+        result2 = str(title_elem2)
+        result2 = result2.replace('<span>','')
+        result2 = result2.replace('</span>','')
+        print(result2)
 
-        if result=='ÇOK YAKINDA' or result=='TÜKENDİ' or result=='None':
+        if result2=='ÇOK YAKINDA' or result2=='TÜKENDİ' or result2=='None':
             print('Stokta yok')
             time.sleep(60)
         else:
-            mailserver.sendmail('sender@gmail.com','receiver@gmail.com',msg.as_string())
+            mailserver.sendmail('furkanbotmailer@gmail.com','fundamete84@hotmail.com',msg.as_string())
             mailserver.quit()
+            print('STOKTA VAR!')
+            ctypes.windll.user32.MessageBoxW(0, "STOKTA VAR! KOŞ! VATAN TATATAN", "Playstation 5", 1)
             sys.exit()
