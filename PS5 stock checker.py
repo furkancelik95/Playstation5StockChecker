@@ -44,7 +44,7 @@ while(True):
             print('Stokta yok')
             time.sleep(60)
         else:
-            mailserver.sendmail('furkanbotmailer@gmail.com','fundamete84@hotmail.com',msg.as_string())
+            mailserver.sendmail('sender@gmail.com','receiver@gmail.com',msg.as_string())
             mailserver.quit()
             print('STOKTA VAR!')
             ctypes.windll.user32.MessageBoxW(0, "STOKTA VAR! KOŞ! VATAN TATATAN", "Playstation 5", 1)
